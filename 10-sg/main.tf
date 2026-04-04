@@ -54,7 +54,7 @@ resource "aws_security_group_rule" "ingress_alb_https" {
   to_port           = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.ingress_alb_sg.ingress_alb_sg_id
+  security_group_id = module.ingress_alb_sg.sg_id
 }
 
 resource "aws_security_group_rule" "node_accepting_from_ingress_alb" {
@@ -62,8 +62,8 @@ resource "aws_security_group_rule" "node_accepting_from_ingress_alb" {
   from_port                = 30000
   to_port                  = 30767
   protocol                 = "tcp"
-  source_security_group_id = module.node_sg.node_sg_id
-  security_group_id        = module.node_sg.node_sg_id
+  source_security_group_id = module.node_sg.sg_id
+  security_group_id        = module.node_sg.sg_id
 }
 
 resource "aws_security_group_rule" "node_accepting_from_eks_control_plane" {
@@ -71,8 +71,8 @@ resource "aws_security_group_rule" "node_accepting_from_eks_control_plane" {
   from_port                = 0
   to_port                  = 0
   protocol                 = "-1"
-  source_security_group_id = module.eks_control_plane_sg.eks_control_plane_sg_id
-  security_group_id        = module.node_sg.node_sg_id
+  source_security_group_id = module.eks_control_plane_sg.sg_id
+  security_group_id        = module.node_sg.sg_id
 }
 
 resource "aws_security_group_rule" "eks_control_plane_accepting_from_node" {
@@ -80,8 +80,8 @@ resource "aws_security_group_rule" "eks_control_plane_accepting_from_node" {
   from_port                = 0
   to_port                  = 0
   protocol                 = "-1"
-  source_security_group_id = module.node_sg.node_sg_id
-  security_group_id        = module.eks_control_plane_sg.eks_control_plane_sg_id
+  source_security_group_id = module.node_sg.sg_id
+  security_group_id        = module.eks_control_plane_sg.sg_id
 }
 
 resource "aws_security_group_rule" "node_receiving_traffic_from_vpc_cidr" {
@@ -90,7 +90,7 @@ resource "aws_security_group_rule" "node_receiving_traffic_from_vpc_cidr" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["10.0.0.0/16"]
-  security_group_id = module.node_sg.node_sg_id
+  security_group_id = module.node_sg.sg_id
 }
 
 resource "aws_security_group_rule" "node_accepting_from_bastion" {
@@ -98,8 +98,8 @@ resource "aws_security_group_rule" "node_accepting_from_bastion" {
   from_port                = 22
   to_port                  = 22
   protocol                 = "tcp"
-  source_security_group_id = module.bastion_sg.bastion_sg_id
-  security_group_id        = module.node_sg.node_sg_id
+  source_security_group_id = module.bastion_sg.sg_id
+  security_group_id        = module.node_sg.sg_id
 }
 
 # resource "aws_security_group_rule" "mysql_accepting_from_nodes" {
@@ -107,8 +107,8 @@ resource "aws_security_group_rule" "node_accepting_from_bastion" {
 #   from_port                = 3306
 #   to_port                  = 3306
 #   protocol                 = "tcp"
-#   source_security_group_id = module.node_sg.node_sg_id
-#   security_group_id        = module.mysql_sg.mysql_sg_id
+#   source_security_group_id = module.node_sg.sg_id
+#   security_group_id        = module.mysql_sg.sg_id
 # }
 
 resource "aws_security_group_rule" "mysql_accepting_from_bastion" {
@@ -116,8 +116,8 @@ resource "aws_security_group_rule" "mysql_accepting_from_bastion" {
   from_port                = 22
   to_port                  = 22
   protocol                 = "tcp"
-  source_security_group_id = module.bastion_sg.bastion_sg_id
-  security_group_id        = module.mysql_sg.mysql_sg_id
+  source_security_group_id = module.bastion_sg.sg_id
+  security_group_id        = module.mysql_sg.sg_id
 }
 
 
@@ -127,6 +127,6 @@ resource "aws_security_group_rule" "bastion_accepting_from_public" {
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.bastion_sg.bastion_sg_id
+  security_group_id = module.bastion_sg.sg_id
 }
 
