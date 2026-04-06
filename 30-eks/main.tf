@@ -21,10 +21,10 @@ module "eks" {
 
   # custom Security Groups
   create_cluster_security_group = false
-  cluster_security_group_id     = local.eks_control_plane_sg.sg_id
+  cluster_security_group_id     = local.eks_control_plane_sg_id
 
   create_node_security_group = false
-  node_security_group_id     = local.node_sg.sg_id
+  node_security_group_id     = local.node_sg_id
 
   # Modern admin access (no more old flag)
   access_entries = {
