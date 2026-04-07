@@ -68,7 +68,7 @@ module "eks" {
       max_size     = 10
       desired_size = 2
 
-      key_name = aws_key_pair.eks.key_name
+      key_name = aws_key_pair.eks_key.key_name
 
       tags = {
         Name = "blue-node"
