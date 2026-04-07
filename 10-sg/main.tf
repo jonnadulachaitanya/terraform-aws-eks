@@ -130,3 +130,12 @@ resource "aws_security_group_rule" "bastion_accepting_from_public" {
   security_group_id = module.bastion_sg.sg_id
 }
 
+resource "aws_security_group_rule" "eks_control_plane_accepting_from_bastion" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = module.bastion_sg.sg_id
+  security_group_id        = module.bastion_sg.sg_id
+}
+
