@@ -1,5 +1,5 @@
 resource "aws_key_pair" "eks_key" {
-  key_name = "eks"
+  key_name = "eks-new"
   # you can paste the public key directly like this
   #public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6ONJth+DzeXbU3oGATxjVmoRjPepdl7sBuPzzQT2Nc sivak@BOOK-I6CR3LQ85Q"
   public_key = file("F:/devops/keys/eks.pub")
@@ -79,7 +79,7 @@ module "eks" {
     #   max_size     = 10
     #   desired_size = 2
 
-    #   key_name = aws_key_pair.eks.key_name
+    #   key_name = aws_key_pair.eks_key.key_name
 
     #   tags = {
     #     Name = "green-node"
