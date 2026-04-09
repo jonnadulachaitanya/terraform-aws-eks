@@ -136,6 +136,6 @@ resource "aws_security_group_rule" "eks_control_plane_accepting_from_bastion" {
   to_port                  = 443
   protocol                 = "tcp"
   source_security_group_id = module.bastion_sg.sg_id
-  security_group_id        = module.bastion_sg.sg_id
+  security_group_id        = module.eks_control_plane_sg.sg_id
 }
 
