@@ -11,7 +11,7 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = "${var.project_name}-${var.environment}"
-  cluster_version = "1.31"
+  cluster_version = "1.32"
 
   cluster_endpoint_public_access = true
 
@@ -52,7 +52,8 @@ module "eks" {
 
   # Node Group Defaults (your policy style)
   eks_managed_node_group_defaults = {
-    instance_types = ["t3.medium"] #"m6i.large", "m5.large", "m5n.large", "m5zn.large"
+    instance_types = ["t3.micro"] #"m6i.large", "m5.large", "m5n.large", "m5zn.large"
+    capacity_type  = "ON_DEMAND"
 
     iam_role_additional_policies = {
       AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
@@ -64,9 +65,9 @@ module "eks" {
   # Node Group
   eks_managed_node_groups = {
     blue = {
-      min_size     = 2
-      max_size     = 10
-      desired_size = 2
+      min_size     = 1
+      max_size     = 1
+      desired_size = 1
 
       key_name = aws_key_pair.eks_key.key_name
 
