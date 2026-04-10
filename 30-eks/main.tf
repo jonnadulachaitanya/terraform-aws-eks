@@ -53,7 +53,7 @@ module "eks" {
   # Node Group Defaults (your policy style)
   eks_managed_node_group_defaults = {
     instance_types = ["t3.medium"] #"m6i.large", "m5.large", "m5n.large", "m5zn.large"
-    capacity_type  = "ON_DEMAND"
+    #capacity_type  = "ON_DEMAND"
 
     iam_role_additional_policies = {
       AmazonEBSCSIDriverPolicy          = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
@@ -75,17 +75,17 @@ module "eks" {
         Name = "blue-node"
       }
     }
-    # green = {
-    #   min_size     = 2
-    #   max_size     = 10
-    #   desired_size = 2
+    green = {
+      min_size     = 2
+      max_size     = 10
+      desired_size = 2
 
-    #   key_name = aws_key_pair.eks_key.key_name
+      key_name = aws_key_pair.eks_key.key_name
 
-    #   tags = {
-    #     Name = "green-node"
-    #   }
-    # }
+      tags = {
+        Name = "green-node"
+      }
+    }
   }
 
   tags = var.common_tags
