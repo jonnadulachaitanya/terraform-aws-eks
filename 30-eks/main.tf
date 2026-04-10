@@ -52,7 +52,7 @@ module "eks" {
 
   # Node Group Defaults (your policy style)
   eks_managed_node_group_defaults = {
-    instance_types = ["t3.micro"] #"m6i.large", "m5.large", "m5n.large", "m5zn.large"
+    instance_types = ["t3.medium"] #"m6i.large", "m5.large", "m5n.large", "m5zn.large"
     capacity_type  = "ON_DEMAND"
 
     iam_role_additional_policies = {
